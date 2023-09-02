@@ -64,7 +64,8 @@ fun HomeScreen(navController: NavController) {
     ) {
         if (animes.loadState.refresh is LoadState.Loading) {
             CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center),
+                color = MaterialTheme.colorScheme.onPrimary
             )
         } else {
 
@@ -92,7 +93,9 @@ fun HomeScreen(navController: NavController) {
 
                     item {
                         if (animes.loadState.append is LoadState.Loading) {
-                            CircularProgressIndicator()
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
                         }
                     }
                 }

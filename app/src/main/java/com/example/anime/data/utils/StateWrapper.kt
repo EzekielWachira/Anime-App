@@ -14,5 +14,5 @@ sealed class StateWrapper<out T> {
     object Loading : StateWrapper<Nothing>()
 
     object Empty : StateWrapper<Nothing>()
-    object Complete : StateWrapper<Nothing>()
+//    object Complete : StateWrapper<Nothing>()
 }

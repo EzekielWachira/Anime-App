@@ -55,8 +55,9 @@ suspend fun <T> safeApiCallWithFlow(dispatcher: CoroutineDispatcher, apiCall: su
             }
         }.onStart {
             emit(StateWrapper.Loading)
-        }.onCompletion {
-            emit(StateWrapper.Complete)
         }
+//            .onCompletion {
+//            emit(StateWrapper.Complete)
+//        }
     }
 }

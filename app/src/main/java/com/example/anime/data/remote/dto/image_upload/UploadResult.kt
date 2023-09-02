@@ -1,8 +1,8 @@
 package com.example.anime.data.remote.dto.image_upload
 
-data class Result(
+data class UploadResult(
     val anilist: Int,
-    val episode: Int,
+//    val episode: Int?,
     val filename: String,
     val from: Double,
     val image: String,
