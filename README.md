@@ -21,13 +21,11 @@ Anime App that shows a list of animations and also allows image upload
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688774372_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688761962_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688818704_100.PNG">
- </div>
-
-<div>
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688926964_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688914725_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688898108_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688883172_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688869794_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688846701_100.PNG">
-</div/
+</div/>
+
