@@ -87,7 +87,7 @@ object RemoteModule {
     @Singleton
     fun provideAnimePager(database: AnimeDatabase,  @AnimeAPI api: AnimeApi): Pager<Int, Anime> {
         return Pager(
-            config = PagingConfig(pageSize = 25),
+            config = PagingConfig(pageSize = 40),
             remoteMediator = AnimeRemoteMediator(
                 animeDatabase = database,
                 animeApi = api

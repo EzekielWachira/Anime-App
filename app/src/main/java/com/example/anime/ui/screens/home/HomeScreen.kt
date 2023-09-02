@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -25,7 +27,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import com.example.anime.ui.screens.home.components.AnimeItem
 import com.example.anime.ui.theme.AnimeTheme
 import com.example.anime.ui.theme.BlueGrey11
@@ -81,14 +86,12 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    items(count = animes.itemCount) { index ->
-                        val anime = animes[index]
-                        if (anime != null) {
-                            AnimeItem(
-                                anime = anime, onAnimeClick = { context.showToast(it.title) },
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
+                    items(animes) { anime ->
+//                        val anime = animes[index]
+                        AnimeItem(
+                            anime = anime, onAnimeClick = { context.showToast(it.title) },
+                            modifier = Modifier.fillMaxWidth()
+                        )
                     }
 
                     item {
@@ -104,6 +107,23 @@ fun HomeScreen(navController: NavController) {
 
     }
 
+}
+
+
+fun <T: Any> LazyListScope.items(
+    items: LazyPagingItems<T>,
+    key: ( (T) -> Any )? = null,
+    contentType: ( (T) -> Any )? = null,
+    itemContent: @Composable LazyItemScope.(T) -> Unit
+) {
+    items(
+        items.itemCount,
+        key = items.itemKey(key),
+        contentType = items.itemContentType(contentType)
+    ) loop@ { i ->
+        val item = items[i] ?: return@loop
+        itemContent(item)
+    }
 }
 
 
