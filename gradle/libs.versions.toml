@@ -28,6 +28,7 @@ room-runtime = "2.5.2"
 runtime-livedata = "1.5.0"
 ui-text-google-fonts = "1.5.0"
 debugger = "1.1.2"
+sentry = "3.12.0"
 
 [libraries]
 
@@ -81,6 +82,7 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }
+sentry = { id = "io.sentry.android.gradle", version.ref="sentry" }
 
 [bundles]
 
