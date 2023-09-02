@@ -24,6 +24,12 @@ Anime App that shows a list of animations and also allows image upload
  </div>
 
 <br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 ## Dark Mode
 <div>
