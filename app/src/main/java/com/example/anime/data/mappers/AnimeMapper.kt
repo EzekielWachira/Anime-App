@@ -10,9 +10,9 @@ object AnimeMapper : DtoToDomain<Data, Anime> {
             malId = origin.mal_id,
             url = origin.url,
             image = AnimeJpgImage(
-                imageUrl = origin.images.jpg.image_url,
-                largeImageUrl = origin.images.jpg.large_image_url,
-                smallImageUrl = origin.images.jpg.small_image_url
+                imageUrl = origin.images?.jpg?.image_url,
+                largeImageUrl = origin.images?.jpg?.large_image_url,
+                smallImageUrl = origin.images?.jpg?.small_image_url
             ),
             title = origin.title,
             titleEnglish = origin.title_english,
@@ -26,7 +26,8 @@ object AnimeMapper : DtoToDomain<Data, Anime> {
             popularity = origin.popularity,
             members = origin.members,
             favorites = origin.favorites,
-            year = origin.year
+            year = origin.year,
+            lastUpdatedAt = System.currentTimeMillis()
         )
     }
 }

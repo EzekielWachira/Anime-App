@@ -28,16 +28,12 @@ class AnimeRemoteMediator(
 
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        1
-                    } else {
-                        lastItem.malId / state.config.pageSize + 1
-                    }
+                    lastItem?.nextPage ?: 1
                 }
             }
 
             val animeResponse = animeApi.getAnimes(
-                page = loadKey.toInt(),
+                page = loadKey,
                 pageCount = state.config.pageSize
             )
 
@@ -46,7 +42,9 @@ class AnimeRemoteMediator(
                     animeDatabase.animeDao.clearAnimes()
                 }
 
-                val animes = animeResponse.data.map { anime -> AnimeMapper.toDomain(anime) }
+                val animes = animeResponse.data.map { anime -> AnimeMapper.toDomain(anime).apply {
+                    nextPage = animeResponse.pagination.current_page + 1
+                }}
                 animeDatabase.animeDao.upsertAnimes(animes)
             }
 

@@ -4,9 +4,9 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 
 data class AnimeJpgImage(
-    val imageUrl: String,
-    val largeImageUrl: String,
-    val smallImageUrl: String
+    val imageUrl: String?,
+    val largeImageUrl: String?,
+    val smallImageUrl: String?
 )
 
 class AnimeJpgImageDataConverter {
