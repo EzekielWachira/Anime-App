@@ -13,7 +13,7 @@ Anime App that shows a list of animations and also allows image upload
 * Room - Persistence library making it easier to work with SQLite database
 * ViewModel - Designed to store and manage UI data in a lifecycler aware fashion.
 
-## LightMode
+## LightMode && Dark Mode
 <div>
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688834474_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688805177_100.PNG">
@@ -23,15 +23,6 @@ Anime App that shows a list of animations and also allows image upload
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688818704_100.PNG">
  </div>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-## Dark Mode
 <div>
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688926964_100.PNG">
 <img align="left" width="200" src="https://github.com/EzekielWachira/Anime-App/blob/main/spotlight/1693688914725_100.PNG">
