@@ -12,6 +12,7 @@ Anime App that shows a list of animations and also allows image upload
 * Dagger Hilt - Used for Dependency Injection
 * Room - Persistence library making it easier to work with SQLite database
 * ViewModel - Designed to store and manage UI data in a lifecycler aware fashion.
+* Paging 3 - Paging library for android
 
 ## LightMode && Dark Mode
 <div>
