@@ -9,6 +9,8 @@ import com.example.anime.data.local.database.AnimeDatabase
 import com.example.anime.data.mappers.AnimeMapper
 import com.example.anime.data.remote.api.AnimeApi
 import com.example.anime.domain.model.Anime
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -19,42 +21,46 @@ class AnimeRemoteMediator(
 ) : RemoteMediator<Int, Anime>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Anime>): MediatorResult {
-        return try {
-            val loadKey = when (loadType) {
-                LoadType.REFRESH -> 1
-                LoadType.PREPEND -> return MediatorResult.Success(
-                    endOfPaginationReached = true
+        return withContext(Dispatchers.IO) {
+            try {
+                val loadKey = when (loadType) {
+                    LoadType.REFRESH -> 1
+                    LoadType.PREPEND -> return@withContext MediatorResult.Success(
+                        endOfPaginationReached = true
+                    )
+
+                    LoadType.APPEND -> {
+                        val lastItem = animeDatabase.animeDao.getLastAnime()
+                        lastItem?.nextPage
+                    }
+                } ?: 1
+
+                val animeResponse = animeApi.getAnimes(
+                    page = loadKey,
+                    pageCount = state.config.pageSize
                 )
 
-                LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                    lastItem?.nextPage ?: 1
-                }
-            }
+                animeDatabase.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        animeDatabase.animeDao.clearAnimes()
+                    }
 
-            val animeResponse = animeApi.getAnimes(
-                page = loadKey,
-                pageCount = state.config.pageSize
-            )
-
-            animeDatabase.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    animeDatabase.animeDao.clearAnimes()
+                    val animes = animeResponse.data.map { anime ->
+                        AnimeMapper.toDomain(anime).apply {
+                            nextPage = animeResponse.pagination.current_page + 1
+                        }
+                    }
+                    animeDatabase.animeDao.upsertAnimes(animes)
                 }
 
-                val animes = animeResponse.data.map { anime -> AnimeMapper.toDomain(anime).apply {
-                    nextPage = animeResponse.pagination.current_page + 1
-                }}
-                animeDatabase.animeDao.upsertAnimes(animes)
+                MediatorResult.Success(
+                    endOfPaginationReached = !animeResponse.pagination.has_next_page
+                )
+            } catch (e: IOException) {
+                MediatorResult.Error(e)
+            } catch (e: HttpException) {
+                MediatorResult.Error(e)
             }
-
-            MediatorResult.Success(
-                endOfPaginationReached = !animeResponse.pagination.has_next_page
-            )
-        } catch (e: IOException) {
-            MediatorResult.Error(e)
-        } catch (e: HttpException) {
-            MediatorResult.Error(e)
         }
     }
 

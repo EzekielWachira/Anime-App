@@ -15,6 +15,9 @@ interface AnimeDao {
     @Query("SELECT * FROM `animations`")
     fun getAnimes(): PagingSource<Int, Anime>
 
+    @Query("SELECT * FROM `animations` ORDER BY `nextPage` DESC")
+    fun getLastAnime(): Anime?
+
     @Query("DELETE FROM `animations`")
     suspend fun clearAnimes()
 
